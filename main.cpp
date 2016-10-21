@@ -36,18 +36,25 @@ private:
 
         if (limitSwitch->Get() == true){
             lift->Set(1);
+        } else {
+            lift->Set(0.0);
         }
 
         ultra->SetAutomaticMode(true);
         int range = ultra->GetRangeInches();
-        if (range == 20){
+        if (range <= 20){
             lift->Set(-1);
+        } else {
+            lift->Set(0.0);
         }
 
+
         float angle = gyro->GetAngle();
-        if (angle == 10){
+        if (angle <= 10) {
             drive->TankDrive(-0.5, -0.5); //will this work???
             //do I need to reset the gyro???
+        } else {
+            drive->TankDrive(0.0,0.0);
         }
 
 
